@@ -1,0 +1,71 @@
+{%extends "base.html"%}
+{% block cuerpo%}
+
+    <div class="row">
+        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <h1>Mamá</h1>
+    
+            <div class="card">
+              <div class="card-body">
+                <form action="/registrarMateria/" method="POST"> {% csrf_token %}
+                  <div class="form-group">
+                    <input type="text" id="txtcodigo" name="txtcodigo" class="form-control"
+                    placeholder="Codigo Materia" minLenght="6" maxLenght="6" required>
+                  </div>
+
+                  <div class="form-group py-3">
+                    <input type="text" id="txtnombre" name="txtnombre" class="form-control"
+                    placeholder="Nombre Materia" maxLenght="100" required>
+                  </div>
+
+                  <div class="form-group py-2">
+                    <input type="text" id="numcreditos" name="numcreditos" class="form-control"
+                    value="1" min="1" max="9" required>
+                  </div>
+                  
+                  <div class="form-group py-2">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+        </div>
+        
+        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <h1>Papá</h1>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Codgio</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Creditos</th>
+                    <th colspan="2">Creditos</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for m in mismaterias%}
+                      <tr>
+                        <td>
+                          {{forloop.counter}}
+                        </td>
+                        <td>{{m.codigo}}</td>
+                        <td>{{m.nombre}}</td>
+                        <td>{{m.creditos}}</td>
+                        <td> <a href="seleccionarMateria/{{m.codigo}}" class="btn btn-success">Editar</a></td>
+                        <td> <a href="borrarMateria/{{m.codigo}}" class="btn btn-danger">Borrar</a></td>
+                      </tr>
+                    {% endfor %}
+
+                </tbody>
+              </table>
+        </div>
+    
+        </div>
+    </div>
+
+
+    
+{%endblock%}
